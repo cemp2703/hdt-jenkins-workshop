@@ -1,0 +1,100 @@
+
+--------- Instalación y levantamiento de Jenkins -----------------------------
+
+- Instalar docker-compose
+
+https://docs.docker.com/compose/install/#master-builds
+
+-Clonar (usando git) o descargar la carpeta del proyecto del repositorio en github (este repositorio) o el original:
+
+https://github.com/jenkinsperu/hdt-jenkins-workshop
+
+-Correr el siguiente comando para descargar y configurar todo lo inicialmente necesario.
+
+docker-compose build 
+
+--Correr el siguiente comando para correr iniciar un contenedor con jenkins instalado basado en la configuración previamente descargada.
+
+docker-compose up
+
+- Jenkins está iniciado cuando se visualiza un mensaje parecido a este en la consola, se podrá apreciar una contraseña
+
+jenkins-server_1  | Jenkins initial setup is required. An admin user has been created and a password generated.
+jenkins-server_1  | Please use the following password to proceed to installation:
+jenkins-server_1  | 
+jenkins-server_1  | 5b17a5005e8544c3986bc1e8d7006886         <-----------Password----------
+jenkins-server_1  | 
+jenkins-server_1  | This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+jenkins-server_1  | 
+jenkins-server_1  | *************************************************************
+jenkins-server_1  | *************************************************************
+jenkins-server_1  | *************************************************************
+jenkins-server_1  | 
+jenkins-server_1  | --> setting agent port for jnlp
+jenkins-server_1  | --> setting agent port for jnlp... done
+jenkins-server_1  | Jun 02, 2018 3:21:55 PM hudson.model.UpdateSite updateData
+jenkins-server_1  | INFO: Obtained the latest update center data file for UpdateSource default
+jenkins-server_1  | Jun 02, 2018 3:21:55 PM hudson.model.UpdateSite updateData
+jenkins-server_1  | INFO: Obtained the latest update center data file for UpdateSource default
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM jenkins.InitReactorRunner$1 onAttained
+jenkins-server_1  | INFO: Completed initialization
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM jenkins.plugins.slack.SlackNotifier$Migrator onLoaded
+jenkins-server_1  | INFO: Starting Settings Migration Process
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM jenkins.plugins.slack.SlackNotifier$Migrator onLoaded
+jenkins-server_1  | INFO: Completed Settings Migration Process
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM hudson.WebAppMain$3 run
+jenkins-server_1  | INFO: Jenkins is fully up and running
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM hudson.model.DownloadService$Downloadable load
+jenkins-server_1  | INFO: Obtained the updated data file for hudson.tasks.Maven.MavenInstaller
+jenkins-server_1  | Jun 02, 2018 3:21:56 PM hudson.model.AsyncPeriodicWork$1 run
+jenkins-server_1  | INFO: Finished Download metadata. 31,743 ms
+
+
+- Ingresar a un navegador web y escribe:
+
+localhost:8080
+
+- Ingresar el password de Administrador inicial que se te otorgó en dicha pantalla.
+
+- Saltar el proceso de instalacion de plugins (los plugins necesarios fueron instalados en el comando docker-compose build).
+
+-------------------------
+__________________________________
+
+Ejercicios:
+
+1.- Creando un item de tipo free-style (deprecated)
+
+2.- Creando un item de tipo pipeline
+
+ - Dentro del item, dirijirse a pestaña Pipeline.
+ - Del Combo, elegir la opcion Pipeline script de SCM.
+ - SCM Git.
+ - url de repositorio: https://github.com/jenkinsperu/todo-demo.git
+
+Esto creará un pipeline a partir del codigo fuente en el repositorio y de acuerdo con el archivo JenkinsFile dentro del mismo.
+Esta es una buena manera de crear pipelines ya que el script del pipeline se versionará junto con el codigo fuente.
+
+--
+
+Se puede visualizar el pipeline de una forma mas visual con la opcion 'Open Blue Ocean', dentro del item.
+
+
+
+
+#Nota: La ejecucion del pipeline se visualizará como correcto, pero en el log podrá visualizarse un mensaje como este:
+
+ERROR: Slack notification failed. See Jenkins logs for details.
+
+Ello es debido a que se intenta notificar a un canal de Slack cuando la ejecucion sea incorrecta y el token del pipeline no ha sido ingresado en el script.
+
+Reemplazar con el token,nombre de canal y nombre de team de su chat en Slack si cuentan con uno.
+
+Ejemplo:
+
+SLACK_CHANNEL= '#ci'
+SLACK_TEAM = 'electro-obras'
+SLACK_TOKEN = 'j4kk34j5k45lk345jlk54jl4'
+
+
+
