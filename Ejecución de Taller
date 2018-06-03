@@ -9,15 +9,15 @@ https://docs.docker.com/compose/install/#master-builds
 
 https://github.com/jenkinsperu/hdt-jenkins-workshop
 
--Correr el siguiente comando para descargar y configurar todo lo inicialmente necesario.
+-Correr el siguiente comando, dentro de la carpeta descargada, para descargar y configurar todo lo inicialmente necesario.
 
 docker-compose build 
 
---Correr el siguiente comando para correr iniciar un contenedor con jenkins instalado basado en la configuración previamente descargada.
+--Correr el siguiente comando, dentro de la carpeta descargada, para iniciar un contenedor con jenkins instalado.
 
 docker-compose up
 
-- Jenkins está iniciado cuando se visualiza un mensaje parecido a este en la consola, se podrá apreciar una contraseña
+- Jenkins está iniciado cuando se visualiza un mensaje parecido a este en la consola. Se podrá apreciar una contraseña
 
 jenkins-server_1  | Jenkins initial setup is required. An admin user has been created and a password generated.
 jenkins-server_1  | Please use the following password to proceed to installation:
